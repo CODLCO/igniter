@@ -32,7 +32,10 @@ fi
 
 # Arg option: 'build'
 build () {
-    $LNCLI buildroute --amt ${AMOUNT} --hops ${HOPS} --outgoing_chan_id ${OUTGOING_CHAN_ID}
+    until $LNCLI buildroute --amt ${AMOUNT} --hops ${HOPS} --outgoing_chan_id ${OUTGOING_CHAN_ID}
+    do echo "Route build failed, retrying in 1 min."
+       sleep 60
+    done
 }
 
 # Arg option: 'send'
